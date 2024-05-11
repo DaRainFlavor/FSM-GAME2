@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="student.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+    <title>Automata App</title>
+    <style>
+        body {
+            background-color: #011F3F; /* Dark blue background color */
+            color: white; /* Text color */
+            position: relative; /* Positioning for absolute elements */
+        }
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 120vh; /* Full viewport height */
+            overflow-y: auto; /* Add vertical scroll if content exceeds viewport */
+        }
+        .content {
+            text-align: center;
+            width: 80%; /* Adjust width as needed */
+            position: relative; /* Positioning for absolute elements */
+        }
+        .btn-group {
+            margin-top: 20px; /* Space above Generate New Regex button */
+            margin-bottom: 20px; /* Space below Check Equivalence button */
+        }
+        .btn-group-checkbox {
+            margin-top: 10px; /* Space between Check Equivalence button and Force DFA Constraint */
+        }
+        .styled-redirects {
+            margin-top: 20px; /* Space above styled redirects */
+        }
+        .score-checker {
+            position: absolute;
+            top: 20px; /* Adjust top position as needed */
+            left: 20px; /* Adjust left position as needed */
+        }
+        .score-checker {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px; /* Space below the score checker */
+        }
+
+        .score-checker span {
+            color: #007bff; /* Blue color for score text */
+            margin-right: 10px; /* Spacing between score text and value */
+        }
+
+        #correct-score {
+            color: #5cb85c; /* Subdued green for correct score */
+        }
+
+        #wrong-score {
+            color: #d9534f; /* Subdued red for wrong score */
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 10px; /* Adjust top position as needed */
+            right: 10px; /* Adjust right position as needed */
+        }
+    </style>
+</head>
+<body class="no-select">
+
+    <div class="content-container">
+        <div class="content">
+            <h1>Finite State Machine Designer</h1>
+
+            <!-- Score Checker -->
+            <div class="score-checker">
+                <span id="correct-score">Correct: </span><span id="wrong-score">Wrong: </span>
+            </div>
+
+            <div class="btn-group">
+                <button onclick="
+                    if(c===regexArr.length) return false;
+                    addNewRegex(regexArr[++c]);
+                    " id="regex-generator" class="btn btn-primary" type="button">Generate New Regex</button>
+            </div>
+
+            <p id="regex"></p>
+
+            <canvas id="flat-canvas" width="800" height="400" style="border:1px solid #000000;"></canvas>
+
+            <p id="result"></p>
+            <div class="btn-group">
+                <button onclick="
+                comp();
+                displayScore();
+                " id="fsm-check" class="btn btn-primary" type="button">Check For Equivalence With Regex</button>
+            </div>
+
+            <div class="btn-group-checkbox">
+                <input type="checkbox" id="dfa-toggle" name="dfa" class="form-check-input">
+                <label for="dfa-toggle" class="form-check-label"> Force DFA Constraint</label>
+            </div>
+
+            <!-- drop down -->
+            <!-- <div class="dropdown">
+                <a class="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="
+                    addDropDownContents();
+                    ">
+                    Questions
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li class="dropdown-item">Apple</li>
+                    <li class="dropdown-item">Banana</li>
+                    <li class="dropdown-item">Orange</li>
+                </ul>
+            </div> -->
+
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" onclick="
+                    toggleDropdown();
+                    addDropDownContents();
+                    " aria-expanded="false">
+                    Questions
+                </button>
+                <ul class="dropdown-menu" id="dropdown-menu"></ul>
+            </div>
+            
+
+
+            <!-- Styled redirects -->
+            <div class="styled-redirects">
+                <div class="btn-group">
+                    <a href="./index.html" class="btn btn-btn-m" style="background-color: #ffd700; color: black;">Go to Home</a>
+                    <a href="./about.html" class="btn btn-btn-m" style="background-color: #ffd700; color: black;">Learn About Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script  src="script2.js" ></script>
+    <script>
+        displayScore();
+        addNewRegex(regexArr[c]);
+    </script>
+     
+</body>
+</html>
