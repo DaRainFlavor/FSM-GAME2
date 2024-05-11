@@ -79,7 +79,7 @@ class Stack {
 }
 
 //set score to previous score else initialize to zero
-let score = JSON.parse(localStorage.getItem('score')) || {
+let score = {
   Correct: 0, Wrong: 0
 }
 
@@ -87,7 +87,7 @@ let score = JSON.parse(localStorage.getItem('score')) || {
 let regexArr = JSON.parse(localStorage.getItem('regexArr')) || [];
 let c = 0;
 
-let answeredArr = JSON.parse(localStorage.getItem('answeredArr')) || [];
+let answeredArr = [];
 for(let i = 0; i<regexArr[i]; i++){
   answeredArr.push(0);
 }
@@ -124,7 +124,6 @@ function updateScore(update){
   else if(update === -1) score.Wrong++;
   else if(update === 1) score.Correct++;
   displayScore();
-  localStorage.setItem('score', JSON.stringify(score));
 }
 
 class Regex {
@@ -1409,7 +1408,6 @@ function comp() {
   if(!answeredArr[c]){
     updateScore(update);
     answeredArr[c] = 1;
-    localStorage.setItem('answeredArr', JSON.stringify(answeredArr));
   }
 }
 
